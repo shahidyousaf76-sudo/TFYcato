@@ -1,0 +1,74 @@
+rules_version = '2';
+
+// TFY Cat Adventure — Firestore security rules.
+// Principles:
+//  * A player can read only their own document and may change only their settings.
+//    Coins, gems, stars, unlocks, progress and achievements change only through Cloud Functions.
+//  * Game content (levels, worlds, shop, achievements, config) is public, read-only.
+//  * Admins (custom claim `role`) can read operational data; all admin writes go through audited functions.
+//  * Admins see aggregate statistics only — there is no rule that lets anyone browse other children's profiles.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn()
+        && request.auth.token.firebase.sign_in_provider != 'anonymous'
+        && request.auth.token.get('role', '') in ['admin', 'super_admin'];
+    }
+    function isBool(v) { return v is bool; }
+    function isVolume(v) { return v is number && v >= 0 && v <= 1; }
+    function validSettings(s) {
+      return s is map
+        && s.keys().hasOnly(['music', 'sound', 'vibration', 'graphics', 'language', 'musicVolume', 'soundVolume', 'reduceMotion', 'gameSpeed'])
+        && s.keys().hasAll(['music', 'sound', 'vibration', 'graphics', 'language', 'musicVolume', 'soundVolume', 'reduceMotion'])
+        && isBool(s.music) && isBool(s.sound) && isBool(s.vibration) && isBool(s.reduceMotion)
+        && s.graphics in ['auto', 'low', 'medium', 'high', 'ultra']
+        && s.language in ['en', 'da', 'de', 'es', 'fr', 'ur', 'ar']
+        && isVolume(s.musicVolume) && isVolume(s.soundVolume)
+        && (!('gameSpeed' in s) || s.gameSpeed in ['slow', 'normal', 'fast']);
+    }
+
+    match /players/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list: if false;
+      allow create, delete: if false; // createPlayer / deleteMyData functions only
+      allow update: if signedIn() && request.auth.uid == uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['settings', 'updatedAt'])
+        && validSettings(request.resource.data.settings)
+        && request.resource.data.updatedAt is int;
+    }
+
+    // Public, read-only game content.
+    match /levels/{id} { allow read: if true; allow write: if false; }
+    match /worlds/{id} { allow read: if true; allow write: if false; }
+    match /catalog/{id} { allow read: if true; allow write: if false; }
+    match /achievements/{id} { allow read: if true; allow write: if false; }
+    match /config/{id} { allow read: if true; allow write: if false; }
+
+    match /announcements/{id} {
+      allow read: if resource.data.active == true || isAdmin();
+      allow write: if false;
+    }
+    match /events/{id} {
+      allow read: if resource.data.active == true || isAdmin();
+      allow write: if false;
+    }
+
+    // Leaderboards show generated usernames and scores only. Hidden entries are visible to admins only,
+    // so client queries must filter on hidden == false.
+    match /leaderboards/{levelId}/entries/{uid} {
+      allow read: if (signedIn() && resource.data.hidden == false) || isAdmin();
+      allow write: if false;
+    }
+
+    // Server-only data.
+    match /usernames/{name} { allow read, write: if false; }
+    match /runs/{uid}/{document=**} { allow read, write: if false; }
+
+    // Admin-readable operational data.
+    match /levelStats/{id} { allow read: if isAdmin(); allow write: if false; }
+    match /adminAudit/{id} { allow read: if isAdmin(); allow write: if false; }
+    match /clientIssues/{id} { allow read: if isAdmin(); allow write: if false; }
+  }
+}

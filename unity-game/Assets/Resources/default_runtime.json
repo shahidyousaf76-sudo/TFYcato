@@ -1,0 +1,64 @@
+{
+  "run_speed_scale": 1,
+  "difficulty_density_scale": 1,
+  "coin_reward_multiplier": 1,
+  "starting_hearts": 3,
+  "powerup_durations": {
+    "magnet": 8,
+    "super_jump": 8,
+    "speed_boost": 5,
+    "double_coins": 10
+  },
+  "daily_rewards": [
+    {
+      "day": 1,
+      "type": "coins",
+      "amount": 100,
+      "label": "100 Coins"
+    },
+    {
+      "day": 2,
+      "type": "coins",
+      "amount": 150,
+      "label": "150 Coins"
+    },
+    {
+      "day": 3,
+      "type": "gems",
+      "amount": 1,
+      "label": "1 Gem"
+    },
+    {
+      "day": 4,
+      "type": "coins",
+      "amount": 200,
+      "label": "200 Coins"
+    },
+    {
+      "day": 5,
+      "type": "item",
+      "amount": 1,
+      "itemId": "blue_scarf",
+      "label": "Blue Scarf"
+    },
+    {
+      "day": 6,
+      "type": "coins",
+      "amount": 300,
+      "label": "300 Coins"
+    },
+    {
+      "day": 7,
+      "type": "item",
+      "amount": 1,
+      "itemId": "rainbow_trail",
+      "label": "Rainbow Trail"
+    }
+  ],
+  "daily_rewards_enabled": true,
+  "shop_enabled": true,
+  "mystery_boxes_enabled": true,
+  "leaderboard_enabled": false,
+  "events_enabled": true,
+  "maintenance_message": ""
+}

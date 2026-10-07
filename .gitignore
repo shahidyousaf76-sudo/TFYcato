@@ -1,0 +1,29 @@
+# Dependencies and build output
+node_modules/
+firebase/functions/lib/
+.firebase/
+
+# Logs (Firebase emulators, npm)
+*-debug.log
+npm-debug.*
+
+# Local env and secrets — never commit real Firebase config or keys
+.env
+.env.local
+.env*.local
+google-services.json
+GoogleService-Info.plist
+*serviceAccount*.json
+*-firebase-adminsdk-*.json
+*.keystore
+*.jks
+*.p12
+*.pem
+
+# Stray folder from an npm install run in the wrong directory
+/TFY-Cat-Adventure/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+/package-lock.json

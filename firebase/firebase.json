@@ -1,0 +1,49 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "runtime": "nodejs22",
+      "ignore": ["node_modules", ".git", "test", "scripts", "*.log"],
+      "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"]
+    }
+  ],
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
+  },
+  "hosting": [
+    {
+      "target": "admin",
+      "public": "../admin-dashboard/out",
+      "ignore": ["**/.*"],
+      "cleanUrls": true,
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "X-Frame-Options", "value": "DENY" },
+            { "key": "X-Content-Type-Options", "value": "nosniff" },
+            { "key": "Referrer-Policy", "value": "no-referrer" },
+            { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+          ]
+        }
+      ]
+    },
+    {
+      "target": "play",
+      "public": "../web-prototype",
+      "ignore": ["**/.*"]
+    }
+  ],
+  "emulators": {
+    "auth": { "port": 9099 },
+    "firestore": { "port": 8080 },
+    "functions": { "port": 5001 },
+    "ui": { "enabled": true, "port": 4000 },
+    "singleProjectMode": true
+  }
+}

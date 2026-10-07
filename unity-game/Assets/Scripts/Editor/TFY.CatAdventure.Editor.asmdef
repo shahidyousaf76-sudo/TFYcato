@@ -1,0 +1,18 @@
+{
+    "name": "TFY.CatAdventure.Editor",
+    "rootNamespace": "TFY.CatAdventure.EditorTools",
+    "references": [
+        "TFY.CatAdventure",
+        "TFY.CatAdventure.Domain",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime"
+    ],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

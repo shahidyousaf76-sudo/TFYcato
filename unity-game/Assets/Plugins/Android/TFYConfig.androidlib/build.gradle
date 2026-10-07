@@ -1,0 +1,7 @@
+apply plugin: 'com.android.library'
+
+android {
+    namespace "com.tfy.catadventure.config"
+    compileSdkVersion 34
+    defaultConfig { minSdkVersion 24 }
+}

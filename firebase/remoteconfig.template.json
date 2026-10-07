@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "run_speed_scale": {
+      "defaultValue": {
+        "value": "1"
+      },
+      "valueType": "NUMBER",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "difficulty_density_scale": {
+      "defaultValue": {
+        "value": "1"
+      },
+      "valueType": "NUMBER",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "coin_reward_multiplier": {
+      "defaultValue": {
+        "value": "1"
+      },
+      "valueType": "NUMBER",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "starting_hearts": {
+      "defaultValue": {
+        "value": "3"
+      },
+      "valueType": "NUMBER",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "powerup_durations": {
+      "defaultValue": {
+        "value": "{\"magnet\":8,\"super_jump\":8,\"speed_boost\":5,\"double_coins\":10}"
+      },
+      "valueType": "JSON",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "daily_rewards": {
+      "defaultValue": {
+        "value": "[{\"day\":1,\"type\":\"coins\",\"amount\":100,\"label\":\"100 Coins\"},{\"day\":2,\"type\":\"coins\",\"amount\":150,\"label\":\"150 Coins\"},{\"day\":3,\"type\":\"gems\",\"amount\":1,\"label\":\"1 Gem\"},{\"day\":4,\"type\":\"coins\",\"amount\":200,\"label\":\"200 Coins\"},{\"day\":5,\"type\":\"item\",\"amount\":1,\"itemId\":\"blue_scarf\",\"label\":\"Blue Scarf\"},{\"day\":6,\"type\":\"coins\",\"amount\":300,\"label\":\"300 Coins\"},{\"day\":7,\"type\":\"item\",\"amount\":1,\"itemId\":\"rainbow_trail\",\"label\":\"Rainbow Trail\"}]"
+      },
+      "valueType": "JSON",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "daily_rewards_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "shop_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "mystery_boxes_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "leaderboard_enabled": {
+      "defaultValue": {
+        "value": "false"
+      },
+      "valueType": "BOOLEAN",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "events_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "valueType": "BOOLEAN",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    },
+    "maintenance_message": {
+      "defaultValue": {
+        "value": ""
+      },
+      "valueType": "STRING",
+      "description": "TFY Cat Adventure — see README (Remote Config)"
+    }
+  }
+}

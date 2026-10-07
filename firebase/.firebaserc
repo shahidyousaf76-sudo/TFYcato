@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "default": "your-firebase-project-id"
+  },
+  "targets": {
+    "your-firebase-project-id": {
+      "hosting": {
+        "admin": ["your-firebase-project-id-admin"],
+        "play": ["your-firebase-project-id"]
+      }
+    }
+  }
+}
